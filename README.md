@@ -16,6 +16,8 @@ Este projeto tem como funcionalidade apresentar um sistema que permita o usuári
 
 ## Como contribuir com o código e realizar alterações
 Com o código aberto, acesse o terminal da sua IDE e utilize os seguintes comandos:
-git add main.c
-git commit -m "Descreva suas alterações aqui"
-git push origin main
+
+
+ git add main.c <br>
+ git commit -m "Descreva suas alterações aqui" <br>
+ git push origin main <br>
