@@ -18,6 +18,7 @@ Este projeto tem como funcionalidade apresentar um sistema que permita o usuári
 Com o código aberto, acesse o terminal da sua IDE e utilize os seguintes comandos:
 
 
- git add main.c <br>
+ git add ../main.c <br>
  git commit -m "Descreva suas alterações aqui" <br>
+ git pull origin main <br>
  git push origin main <br>
