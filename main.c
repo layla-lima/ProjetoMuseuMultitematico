@@ -1,5 +1,47 @@
 int main(int argc, char const *argv[])
 {
-    /* code */
+    int tipoIngresso;
+    int menu;
+    printf("Seja bem-vindo ao Museu Multitemático! Escolha uma das seguintes opções para prosseguir:\n");
+    printf("MENU:\n");
+    printf("1 - Comprar Ingresso\n");
+    printf("2 - Validar Ingresso\n");
+    printf("3 - Sair\n");
+    scanf("%d", &menu);
+
+    switch (menu)
+    {
+    case 1:
+
+        printf("Qual é o tipo de ingresso?\n");
+        printf("1- Normal\n");
+        printf("2- Meia Entrada\n");
+        printf("3- Entrada Isenta\n");
+        scanf("%d", &tipoIngresso);
+
+        switch (tipoIngresso)
+        {
+        case 1:
+            printf("Valor total de 30 reais.");
+            break;
+        case 2:
+            printf("Valor total de 15 reais.");
+            break;
+        case 3:
+            printf("Valor Isento. (Mediante a apresentação de documentação comprovativa).");
+            break;
+        default:
+            printf("Resposta inválida.");
+            break;
+        }
+
+        break;
+
+    
+    
+    default:
+        break;
+    }
+
     return 0;
 }
