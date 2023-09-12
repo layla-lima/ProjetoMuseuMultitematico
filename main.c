@@ -3,7 +3,6 @@ int main(int argc, char const *argv[])
     int tipoIngresso;
     int menu;
     printf("Seja bem-vindo ao Museu Multitemático! Escolha uma das seguintes opções para prosseguir:\n");
-    printf("MENU:\n");
     printf("1 - Comprar Ingresso\n");
     printf("2 - Validar Ingresso\n");
     printf("3 - Sair\n");
@@ -37,11 +36,21 @@ int main(int argc, char const *argv[])
 
         break;
 
+    /*
+    case 2:
+
+        printf("[...]");
     
-    
+    case 3:
+
+        printf("[...]");
+    */
+
     default:
+        printf("Resposta inválida.");
         break;
     }
 
     return 0;
+
 }
