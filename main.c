@@ -1,15 +1,18 @@
  /*
  ==== PIM UNIP ====
+
  ANOTAÇÕES/MODIFICAÇÕES: 
+
  - Caracteres especiais (ç, ã, á[...]) não são reconhecidos pela linguagem C, será necessário aplicar o codigo de cada caractere para tornar o código legível no terminal.
  - Terminar [case 2] e [case 3] (Ln 48, 52).
-  */
+*/
 
 int main(int argc, char const *argv[])
 {
     int tipoIngresso;
     int menu;
    
+
     printf("Seja bem-vindo(a) ao Museu Multitemático! Escolha uma das seguintes opções para prosseguir:\n");
     printf("1 - Comprar Ingresso\n");
     printf("2 - Validar Ingresso\n");
