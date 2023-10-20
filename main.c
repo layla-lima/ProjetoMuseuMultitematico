@@ -45,7 +45,8 @@ int main() {
         printf("\n1 - Descricao das Exibicoes\n");
         printf("2 - Comprar ingresso\n");
         printf("3 - Validar ingresso\n");
-        printf("4 - Sair\n");
+        printf("4 - Questionario\n");
+        printf("5 - Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
 
@@ -54,6 +55,7 @@ int main() {
                 printf("Descricao das exibicoes:\n");
                 printf("Exibicao 1: [...]\n");
                 printf("Exibicao 2: [...]\n");
+                // Adicionar as descrições aqui
                 return 0;
             case 2:
                 if (ingressosGerados < limiteIngressos) {
@@ -79,6 +81,7 @@ int main() {
                         printf("\nIngresso valido:\n");
                         exibirIngresso(ingresso);
                         ingresso.valido = 0; // Marca o ingresso como inválido após validação
+                        return 0;
                     } else {
                         printf("\nEste ingresso já foi validado.\n");
                     }
@@ -87,10 +90,14 @@ int main() {
                 }
                 break;
             case 4:
-                printf("Saindo do programa.\n");
+                // Codigo do questionario aqui
                 break;
+            case 5:
+                printf("Encerrando o programa...");
+                return 0;
+
             default:
-                printf("Opção invalida. Tente novamente.\n");
+                printf("Opcao invalida. Tente novamente.\n");
         }
     } while (opcao != 4);
 
