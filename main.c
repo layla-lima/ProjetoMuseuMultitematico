@@ -1,105 +1,98 @@
 #include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
+#include <stdlib.h>
+#include <time.h>
 
-int main(int argc, char const *argv[]) {
-    int menu;
-    int menu2;
-    int ingressoComprado = 0;  
-    // Códigos de ingresso válidos
-    char codigosIngressoNormal[][6] = {"n1700", "n9110", "n6210", "n5900", "n1610"}; 
-    char codigosIngressoMeia[][6] = {"m1080", "m1010", "m2170", "m9600", "m1710"};
-    char codigo[6];
+// Estrutura para representar um ingresso
+typedef struct {
+    int numero;
+    int valido;
+} Ingresso;
 
-    printf("Seja bem-vindo ao Museu Multitematico! Escolha uma opção para prosseguir:\n");
-    printf("===== MENU =====\n");
-    printf("1 - Comprar Ingresso\n");
-    printf("2 - Validar Ingresso\n");
-    printf("3 - Questionario\n");
-    printf("4 - Sair\n");
-    scanf("%d", &menu);
+// Função pra gerar um número de ingresso aleatório
+int gerarNumeroIngresso() {
+    return rand() % 10000 + 1000; // Números entre 1000 e 9999
+}
 
-    switch (menu) {
-    case 1:
-        if (ingressoComprado) {
-            printf("Você ja comprou um ingresso.\n");
-        }
-        else {
-            printf("Selecione o tipo de ingresso:\n");
-            printf("1 - Entrada Normal\n");
-            printf("2 - Meia Entrada\n");
-            printf("3 - Entrada Isenta\n");
-            scanf("%d", &menu2);
+// Função pra criar um novo ingresso com base no tipo
+Ingresso criarIngresso(int tipo) {
+    Ingresso novo;
+    novo.numero = gerarNumeroIngresso();
+    novo.valido = 1; // Ingresso é válido por padrão
+    return novo;
+}
 
-            switch (menu2) {
+// Função pra exibir o ingresso
+void exibirIngresso(Ingresso ingresso) {
+    printf("Numero do ingresso: %d\n", ingresso.numero);
+    if (ingresso.valido) {
+        printf("Status: Valido\n");
+    } else {
+        printf("Status: Invalido\n");
+    }
+}
+
+int main() {
+    srand(time(NULL)); // Inicializa números aleatórios
+    int opcao;
+    Ingresso ingresso;
+    int codigoIngresso;
+    int tipoIngresso;
+    int limiteIngressos = 10; // Limite de 10 ingressos (pode ser alterado)
+    int ingressosGerados = 0;
+
+    do {
+        printf("\n\n=== MENU MUSEU MULTITEMATICO ===\n");
+        printf("\n1 - Descricao das Exibicoes\n");
+        printf("2 - Comprar ingresso\n");
+        printf("3 - Validar ingresso\n");
+        printf("4 - Sair\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
             case 1:
-                if (ingressoComprado) {
-                    printf("Você ja comprou um ingresso.\n");
-                }
-                else {
-                    printf("Valor de 30 reais. Codigo de ingresso gerado: ");
-                    for (int i = 0; i < 5; i++) {
-                        if (codigosIngressoNormal[i][0] != '\0') {
-                            printf("%s\n", codigosIngressoNormal[i]);
-                            strcpy(codigosIngressoNormal[i], ""); // Marcar código como usado
-                            ingressoComprado = 1;
-                            break;
-                        }
-                    }
+                printf("Descricao das exibicoes:\n");
+                printf("Exibicao 1: [...]\n");
+                printf("Exibicao 2: [...]\n");
+                return 0;
+            case 2:
+                if (ingressosGerados < limiteIngressos) {
+                    printf("\nSelecione o tipo do ingresso:\n");
+                    printf("1 - Entrada Normal: 6 reais\n");
+                    printf("2 - Meia Entrada: 3 reais (mediante a comprovacao)\n");
+                    printf("3 - Entrada Isenta: valor isento (mediante a comprovacao)\n");
+                    printf("Escolha um tipo: ");
+                    scanf("%d", &tipoIngresso);
+                    ingresso = criarIngresso(tipoIngresso);
+                    printf("\nNovo ingresso gerado:\n");
+                    exibirIngresso(ingresso);
+                    ingressosGerados++;
+                } else {
+                    printf("\nLimite de ingressos atingido. Nao e possivel gerar mais ingressos.\n");
                 }
                 break;
-            case 2:
-                if (ingressoComprado) {
-                    printf("Você ja comprou um ingresso.\n");
-                } else {
-                    printf("Valor de 15 reais. Codigo de ingresso gerado: ");
-                    for (int i = 0; i < 5; i++) {
-                        if (codigosIngressoMeia[i][0] != '\0') {
-                            printf("%s\n", codigosIngressoMeia[i]);
-                            strcpy(codigosIngressoMeia[i], ""); // Marcar código como usado
-                            ingressoComprado = 1;
-                            break;
-                        }
+            case 3:
+                printf("Digite o codigo do ingresso: ");
+                scanf("%d", &codigoIngresso);
+                if (codigoIngresso == ingresso.numero) {
+                    if (ingresso.valido) {
+                        printf("\nIngresso valido:\n");
+                        exibirIngresso(ingresso);
+                        ingresso.valido = 0; // Marca o ingresso como inválido após validação
+                    } else {
+                        printf("\nEste ingresso já foi validado.\n");
                     }
+                } else {
+                    printf("\nCodigo de ingresso invalido.\n");
                 }
+                break;
+            case 4:
+                printf("Saindo do programa.\n");
                 break;
             default:
-                printf("Resposta invalida.\n");
-                break;
-            }
+                printf("Opção invalida. Tente novamente.\n");
         }
-        break;
-    case 2:
-        // Verificar se o código digitado está na lista de ingressos válidos
-        printf("Digite o codigo de ingresso a ser validado: ");
-        scanf("%s", codigo);
-
-        bool codigoEncontrado = false;
-        for (int i = 0; i < 5; i++) {
-            if (strcmp(codigo, codigosIngressoNormal[i]) == 0 || strcmp(codigo, codigosIngressoMeia[i]) == 0) {
-                printf("Codigo de ingresso valido.\n");
-                codigoEncontrado = true;
-                break;
-            }
-        }
-
-        if (!codigoEncontrado) {
-            printf("Codigo de ingresso invalido ou utilizado.\n");
-        }
-        break;
-
-    case 3:
-        // Criar código do questionário aqui
-        break;
-
-    case 4:
-        printf("Programa finalizado com sucesso.\n");
-        break;
-
-    default:
-        printf("Resposta invalida.\n");
-        break;
-    }
+    } while (opcao != 4);
 
     return 0;
 }
