@@ -21,6 +21,43 @@ Ingresso criarIngresso(int tipo) {
     return novo;
 }
 
+//exibicao dos tesmas
+void exibicao(){
+        int opcao;
+        printf("\n\n=== TEMAS MUSEU MULTITEMATICO ===\n");
+        printf("1 - Exibicao 1\n");
+        printf("2 - Exibicao 2\n");
+        printf("3 - Exibicao 3\n");
+        printf("4 - Exibicao 4\n");
+        printf("5 - Voltar\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+        switch (opcao) {
+          case 1:
+            printf("Exibicao 1");
+            questionario(1);
+            break;
+          case 2:
+            printf("Exibicao 2");
+            break;
+          case 3:
+            printf("Exibicao 3");
+            break;
+          case 4:
+            printf("Exibicao 4");
+            break;
+          case 5:
+            main();
+            break;
+        }
+}
+
+void questionario (int exibicao){
+
+
+}
+
+
 // Função pra exibir o ingresso
 void exibirIngresso(Ingresso ingresso) {
     printf("Numero do ingresso: %d\n", ingresso.numero);
@@ -42,22 +79,14 @@ int main() {
 
     do {
         printf("\n\n=== MENU MUSEU MULTITEMATICO ===\n");
-        printf("\n1 - Descricao das Exibicoes\n");
-        printf("2 - Comprar ingresso\n");
-        printf("3 - Validar ingresso\n");
-        printf("4 - Questionario\n");
-        printf("5 - Sair\n");
+        printf("1 - Comprar ingresso\n");
+        printf("2 - Validar ingresso\n");
+        printf("3 - Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
 
         switch (opcao) {
             case 1:
-                printf("Descricao das exibicoes:\n");
-                printf("Exibicao 1: [...]\n");
-                printf("Exibicao 2: [...]\n");
-                // Adicionar as descrições aqui
-                return 0;
-            case 2:
                 if (ingressosGerados < limiteIngressos) {
                     printf("\nSelecione o tipo do ingresso:\n");
                     printf("1 - Entrada Normal: 6 reais\n");
@@ -73,7 +102,7 @@ int main() {
                     printf("\nLimite de ingressos atingido. Nao e possivel gerar mais ingressos.\n");
                 }
                 break;
-            case 3:
+            case 2:
                 printf("Digite o codigo do ingresso: ");
                 scanf("%d", &codigoIngresso);
                 if (codigoIngresso == ingresso.numero) {
@@ -81,6 +110,7 @@ int main() {
                         printf("\nIngresso valido:\n");
                         exibirIngresso(ingresso);
                         ingresso.valido = 0; // Marca o ingresso como inválido após validação
+                        exibicao();
                         return 0;
                     } else {
                         printf("\nEste ingresso já foi validado.\n");
@@ -89,16 +119,14 @@ int main() {
                     printf("\nCodigo de ingresso invalido.\n");
                 }
                 break;
-            case 4:
-                // Codigo do questionario aqui
-                break;
-            case 5:
+            case 3:
                 printf("Encerrando o programa...");
                 return 0;
 
             default:
                 printf("Opcao invalida. Tente novamente.\n");
         }
+
     } while (opcao != 4);
 
     return 0;
