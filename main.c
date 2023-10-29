@@ -127,7 +127,7 @@ int main() {
                 printf("Opcao invalida. Tente novamente.\n");
         }
 
-    } while (opcao != 4);
+    } while (opcao != 3);
 
     return 0;
 }
