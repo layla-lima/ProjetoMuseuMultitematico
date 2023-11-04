@@ -1,7 +1,10 @@
 # Projeto de Museu Multitemático - PIM (UNIP)
 
 ## Status
-• *Em andamento*
+• Sistema de Compra de Ingressos: *Concluído* <br>
+• Sistema de Validação de Ingressos: *Concluído* <br>
+• Descrição dos Temas: *Em andamento* <br>
+• Questionário: *Em andamento* <br>
 
 ## Objetivo
 Este projeto tem como funcionalidade apresentar um sistema que permita o usuário comprar bilhetes para a exposição, tendo opções de entrada cheia, meia entrada ou isenção seguindo a legislação vigente. O visitante poderá comprar ingressos para ver um tema ou mais, assim ao entrar no espaço reservado ao tema o visitante deverá mostrar o ticket de entrada que deverá ser dado baixa no sistema. [No arquivo em um computador central na rede.]
