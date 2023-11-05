@@ -1,6 +1,99 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <locale.h>
+
+
+// Funções pra ler os arquivos txt
+
+
+void exibirConteudoArquivo1(const char *nomeArquivo)
+{
+    setlocale(LC_ALL, "Portuguese");
+    FILE *arquivo;
+    char linha[1000]; // Tamanho max de uma linha
+
+    arquivo = fopen("tema1.txt", "r"); // Abre o arquivo para leitura
+
+    if (arquivo == NULL)
+    {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
+    // Lê e imprime o conteúdo do arquivo linha por linha
+    while (fgets(linha, sizeof(linha), arquivo) != NULL)
+    {
+        printf("%s", linha);
+
+    }
+
+    fclose(arquivo); // Fecha o arquivo após a leitura
+}
+
+void exibirConteudoArquivo2(const char *nomeArquivo)
+{
+    FILE *arquivo;
+    char linha[1000];
+
+    arquivo = fopen("tema2.txt", "r");
+
+    if (arquivo == NULL)
+    {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
+    while (fgets(linha, sizeof(linha), arquivo) != NULL)
+    {
+        printf("%s", linha);
+
+    }
+
+    fclose(arquivo);
+}
+
+void exibirConteudoArquivo3(const char *nomeArquivo)
+{
+    FILE *arquivo;
+    char linha[1000];
+
+    arquivo = fopen("tema3.txt", "r");
+
+    if (arquivo == NULL)
+    {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
+    while (fgets(linha, sizeof(linha), arquivo) != NULL)
+    {
+        printf("%s", linha);
+
+    }
+
+    fclose(arquivo);
+}
+
+void exibirConteudoArquivo4(const char *nomeArquivo)
+{
+    FILE *arquivo;
+    char linha[1000];
+
+    arquivo = fopen("tema4.txt", "r");
+
+    if (arquivo == NULL)
+    {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
+    while (fgets(linha, sizeof(linha), arquivo) != NULL)
+    {
+        printf("%s", linha);
+
+    }
+
+    fclose(arquivo);
+}
+
+
 
 // Estrutura para representar um ingresso
 typedef struct {
@@ -21,30 +114,30 @@ Ingresso criarIngresso(int tipo) {
     return novo;
 }
 
-//exibicao dos tesmas
+//exibicao dos temas
 void exibicao(){
+        setlocale(LC_ALL, "Portuguese");
         int opcao;
-        printf("\n\n=== TEMAS MUSEU MULTITEMATICO ===\n");
-        printf("1 - Exibicao 1\n");
-        printf("2 - Exibicao 2\n");
-        printf("3 - Exibicao 3\n");
-        printf("4 - Exibicao 4\n");
+        printf("\n\n ========= TEMAS =========\n");
+        printf("1 - 100 Anos de Arte Moderna \n");
+        printf("2 - 150 Anos de Santos Dumont \n");
+        printf("3 - Jogos Olimpicos de Paris 2024\n");
+        printf("4 - Literatura Brasileira Comtemporanea\n");
         printf("5 - Voltar\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
         switch (opcao) {
           case 1:
-            printf("Exibicao 1");
-            questionario(1);
+            exibirConteudoArquivo1("tema1.txt");
             break;
           case 2:
-            printf("Exibicao 2");
+            exibirConteudoArquivo2("tema2.txt");
             break;
           case 3:
-            printf("Exibicao 3");
+            exibirConteudoArquivo3("tema3.txt");
             break;
           case 4:
-            printf("Exibicao 4");
+            exibirConteudoArquivo4("tema4.txt");
             break;
           case 5:
             main();
@@ -69,6 +162,9 @@ void exibirIngresso(Ingresso ingresso) {
 }
 
 int main() {
+
+    setlocale(LC_ALL, "Portuguese"); //Coloca a linguagem em Português, aceitando caracteres especiais
+
     srand(time(NULL)); // Inicializa números aleatórios
     int opcao;
     Ingresso ingresso;
@@ -76,6 +172,7 @@ int main() {
     int tipoIngresso;
     int limiteIngressos = 10; // Limite de 10 ingressos (pode ser alterado)
     int ingressosGerados = 0;
+
 
     do {
         printf("\n\n=== MENU MUSEU MULTITEMATICO ===\n");
