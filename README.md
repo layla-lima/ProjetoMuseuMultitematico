@@ -3,7 +3,7 @@
 ## Status
 • Sistema de Compra de Ingressos: *Concluído* <br>
 • Sistema de Validação de Ingressos: *Concluído* <br>
-• Descrição dos Temas: *Em andamento* <br>
+• Descrição dos Temas: *Concluído* <br>
 • Questionário: *Em andamento* <br>
 
 ## Objetivo
