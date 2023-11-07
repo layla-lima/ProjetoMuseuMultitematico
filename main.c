@@ -1,12 +1,66 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 #include <time.h>
 #include <locale.h>
 
+//Funcao para questionario e coleta de respostas
+void questionario(int numeroDaExbicao, char tema[100]){
+
+    int contador = 0;
+    FILE *arquivoContador;
+
+    arquivoContador = fopen("contador.txt", "r+");
+
+    if (arquivoContador != NULL) {
+        fscanf(arquivoContador, "%d", &contador);
+        contador++;
+        rewind(arquivoContador);
+        fprintf(arquivoContador, "%d", contador);
+        fclose(arquivoContador);
+    }
+
+    int respostaPerguntaUm, respostaPerguntaDois;
+    char pergunta1[100] = " Em uma escala de 1 a 5, quao satisfeito voce esta com a exposicao?";
+    char pergunta2[100] = " Em uma escala de 1 a 5, qual a proprabilidade de vc recomendar essa exibicao a um amigo?";
+
+    do{
+       printf("%s %c \n", pergunta1);
+       scanf("%i", &respostaPerguntaUm);
+       printf("%s %c \n", pergunta2);
+       scanf("%i", &respostaPerguntaDois);
+       if (respostaPerguntaUm > 5 || respostaPerguntaDois > 5) {
+            printf("Por favor, insira um valor entre 0 e 5. Tente novamente! \n\n\n\n");
+       }
+ //      switch(respostaPerguntaUm){
+ //        case 1:
+ //            (1/contador)*100
+//
+ //      }
+
+
+    }while(respostaPerguntaUm > 5 || respostaPerguntaDois > 5);
+
+
+    FILE *arquivo;
+    arquivo = fopen("estatistica.csv", "w");
+
+    if(arquivo == NULL){
+        printf("Não foi possivel abrir o arquivo. \n");
+        return 1;
+    }
+    fprintf(arquivo, "Tema; Pergunta; nota1; Nota2; Nota3; Nota4; Nota5 \n");
+    fprintf(arquivo, "%s; %s\n", tema, pergunta1);
+    fprintf(arquivo, "%s; %s\n", tema, pergunta2);
+
+    fclose(arquivo);
+
+    printf("Obrigado pelas respostas validas!\n");
+    return 0;
+
+}
 
 // Funções pra ler os arquivos txt
-
-
 void exibirConteudoArquivo1(const char *nomeArquivo)
 {
     setlocale(LC_ALL, "Portuguese");
@@ -93,8 +147,6 @@ void exibirConteudoArquivo4(const char *nomeArquivo)
     fclose(arquivo);
 }
 
-
-
 // Estrutura para representar um ingresso
 typedef struct {
     int numero;
@@ -118,38 +170,48 @@ Ingresso criarIngresso(int tipo) {
 void exibicao(){
         setlocale(LC_ALL, "Portuguese");
         int opcao;
+        char tema[100];
         printf("\n\n ========= TEMAS =========\n");
         printf("1 - 100 Anos de Arte Moderna \n");
         printf("2 - 150 Anos de Santos Dumont \n");
         printf("3 - Jogos Olimpicos de Paris 2024\n");
         printf("4 - Literatura Brasileira Comtemporanea\n");
         printf("5 - Voltar\n");
+        printf("6 - Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
         switch (opcao) {
           case 1:
             exibirConteudoArquivo1("tema1.txt");
+            strcpy(tema, "100 anos da semana de arte moderna");
             break;
           case 2:
             exibirConteudoArquivo2("tema2.txt");
+            strcpy(tema, "150 Anos de Santos Dumont");
             break;
           case 3:
             exibirConteudoArquivo3("tema3.txt");
+            strcpy(tema, "Jogos Olimpicos de Paris 2024");
             break;
           case 4:
             exibirConteudoArquivo4("tema4.txt");
+            strcpy(tema, "Literatura Brasileira Comtemporanea");
             break;
           case 5:
             main();
             break;
+          case 6:
+            printf("Encerrando Programa... \n");
+            exit(0);
+            break;
+          default:
+            printf("Digito incorreto, tente novamente \n");
+            exibicao();
+            break;
         }
+       system("\n\n pause");
+       questionario(opcao, tema);
 }
-
-void questionario (int exibicao){
-
-
-}
-
 
 // Função pra exibir o ingresso
 void exibirIngresso(Ingresso ingresso) {

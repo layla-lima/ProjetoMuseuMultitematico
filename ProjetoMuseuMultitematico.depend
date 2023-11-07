@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1356735044 source:c:\users\nikol\onedrive\documentos\projetos\unip\projetomuseumultitematico\libcsv-3.0.3\libcsv.c
+	<stdint.h>
+	"csv.h"
+
+1356735044 c:\users\nikol\onedrive\documentos\projetos\unip\projetomuseumultitematico\libcsv-3.0.3\csv.h
+	<stdlib.h>
+	<stdio.h>
+
+1356735044 source:c:\users\nikol\onedrive\documentos\projetos\unip\projetomuseumultitematico\libcsv-3.0.3\test_csv.c
+	<stdio.h>
+	<string.h>
+	<assert.h>
+	<stdlib.h>
+	"./csv.h"
+
+1699322673 source:c:\users\nikol\onedrive\documentos\projetos\unip\projetomuseumultitematico\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<time.h>
+	<locale.h>
+
