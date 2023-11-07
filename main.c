@@ -4,9 +4,7 @@
 #include <time.h>
 #include <locale.h>
 
-
-// Funções pra ler os arquivos txt
-
+//Funcao para questionario e coleta de respostas
 void questionario(int numeroDaExbicao, char tema[100]){
 
     int contador = 0;
@@ -62,7 +60,7 @@ void questionario(int numeroDaExbicao, char tema[100]){
 
 }
 
-
+// Funções pra ler os arquivos txt
 void exibirConteudoArquivo1(const char *nomeArquivo)
 {
     setlocale(LC_ALL, "Portuguese");
