@@ -9,8 +9,9 @@
 char tema1[100] = "100 anos da semana de arte moderna";
 char tema2[100] = "150 Anos de Santos Dumont";
 char tema3[100] = "Jogos Olimpicos de Paris 2024";
-char tema4[100] = "Literatura Brasileira Comtemporanea";
+char tema4[100] = "Literatura Brasileira Contemporanea";
 
+//metodo para verificar se determinado valor existe no arquivo csv
 int valorJaExiste(const char *valor, const char *nomeArquivo) {
     FILE *arquivo = fopen(nomeArquivo, "r");
     if (arquivo == NULL) {
@@ -29,6 +30,7 @@ int valorJaExiste(const char *valor, const char *nomeArquivo) {
     return 0;
 }
 
+//metodo que retorna o caminho para guardar a quantidade de resposta do usuario na primeira pergunta
 char* devolverArquivoContador1(char *valor, char tema[100]) {
    char arquivo[100];
 
@@ -60,6 +62,7 @@ char* devolverArquivoContador1(char *valor, char tema[100]) {
     return nomeDoArquivo;
 }
 
+//metodo que retorna o caminho para guardar a quantidade de resposta do usuario na segunda pergunta
 char* devolverArquivoContador2(char *valor, char tema[100]) {
    char arquivo[100];
 
@@ -92,8 +95,8 @@ char* devolverArquivoContador2(char *valor, char tema[100]) {
 }
 
 
-
-int decobreSegundaParte(char arquivoAlterado[100], char tema[100], char resposta[10]) {
+//metodo de descobrimento do valor no contador para saber a quantidade de vezes que a opção foi escolhida pelos usuarios na pergunta 1
+int descobreSegundaParte(char arquivoAlterado[100], char tema[100], char resposta[10]) {
     char arquivoNaoAlterado[100];
 
     if(strcmp(tema, tema1)==0){
@@ -133,7 +136,8 @@ int decobreSegundaParte(char arquivoAlterado[100], char tema[100], char resposta
     return valorLido;
 }
 
-int decobreSegundaParte2(char arquivoAlterado[100], char tema[100], char resposta[10]) {
+//metodo de descobrimento do valor no contador para saber a quantidade de vezes que a opção foi escolhida pelos usuarios na pergunta 2
+int descobreSegundaParte2(char arquivoAlterado[100], char tema[100], char resposta[10]) {
     char arquivoNaoAlterado[100];
 
     if(strcmp(tema, tema1)==0){
@@ -173,6 +177,7 @@ int decobreSegundaParte2(char arquivoAlterado[100], char tema[100], char respost
     return valorLido;
 }
 
+//metodo que aumenta +1 no contadores, a cada chamada do usuario
 int aumentarContador (char file[100]){
     int valorAtual;
     char linha[100];
@@ -190,6 +195,7 @@ int aumentarContador (char file[100]){
     }
 }
 
+//metodo pra descobrir o "total" dos usuarios com base no tema escolhido
 int contadorTema (char tema[100]){
     char arquivo[100];
 
@@ -206,7 +212,9 @@ int contadorTema (char tema[100]){
     return aumentarContador(arquivo);
 }
 
+//metodo para salvar as porcetagens no arquivo csv
 void salvarNotaParaTema(const char *nomeArquivo, const char *tema, const char *pergunta, double porcentagem, double porcentagem2, char *valorPassadoPeloUsuario) {
+
     FILE *arquivoOriginal = fopen(nomeArquivo, "r");
     if (arquivoOriginal == NULL) {
         printf("Erro ao abrir o arquivo.\n");
@@ -267,8 +275,6 @@ void salvarNotaParaTema(const char *nomeArquivo, const char *tema, const char *p
 
     // Renomear o arquivo temporário para o nome do arquivo original
     rename("temporario.csv", nomeArquivo);
-
-    printf("Nota para o tema %s salva com sucesso!\n", tema);
 }
 
 
@@ -290,20 +296,17 @@ void questionario(int numeroDaExbicao, char tema[100]){
        scanf("%s", respostaPerguntaUm);
        char* nomeDoArquivo = devolverArquivoContador1(respostaPerguntaUm, tema);
        parte1Pergunta1 = aumentarContador(nomeDoArquivo);
-       parte2Pergunta1 = decobreSegundaParte(nomeDoArquivo, tema, respostaPerguntaUm);
+       parte2Pergunta1 = descobreSegundaParte(nomeDoArquivo, tema, respostaPerguntaUm);
 
 
        printf("%s \n", pergunta2);
        scanf("%s", respostaPerguntaDois);
        char* nomeDoArquivo2 = devolverArquivoContador2(respostaPerguntaDois, tema);
        parte1Pergunta2 = aumentarContador(nomeDoArquivo2);
-       parte2Pergunta2 = decobreSegundaParte2(nomeDoArquivo2, tema, respostaPerguntaDois);
+       parte2Pergunta2 = descobreSegundaParte2(nomeDoArquivo2, tema, respostaPerguntaDois);
 
        strlwr(respostaPerguntaUm);
        strlwr(respostaPerguntaDois);
-
-        printf("Arquivo 1: %s \n", nomeDoArquivo);
-        printf("Arquivo 2: %S \n", nomeDoArquivo2);
 
         if (strcmp(respostaPerguntaUm, "nao") != 0 && strcmp(respostaPerguntaUm, "sim") != 0 &&
             strcmp(respostaPerguntaDois, "nao") != 0 && strcmp(respostaPerguntaDois, "sim") != 0) {
@@ -323,18 +326,6 @@ void questionario(int numeroDaExbicao, char tema[100]){
     porcetagem2Primeira = ((double)parte2Pergunta1/todo)*100;
     porcetagemSegunda = ((double)parte1Pergunta2/todo)*100;
     porcetagem2Segunda = ((double)parte2Pergunta2/todo)*100;
-
-    printf("parte1Pergunta1: %d \n", parte1Pergunta1);
-    printf("parte2Pergunta1: %d \n", parte2Pergunta1);
-    printf("parte1Pergunta2: %d \n", parte1Pergunta2);
-    printf("parte2Pergunta2: %d \n", parte2Pergunta2);
-    printf("todo: %d \n", todo);
-
-    printf("Porcentagem pergunta 1: %f \n", porcetagemPrimeira);
-    printf("Porcentagem pergunta 1: %f \n", porcetagem2Primeira);
-    printf("Porcentagem pergunta 2: %f \n", porcetagemSegunda);
-    printf("Porcentagem pergunta 2: %f \n", porcetagem2Segunda);
-
 
     if(arquivo == NULL){
         printf("Não foi possivel abrir o arquivo. \n");
@@ -466,10 +457,10 @@ void exibicao(){
         int opcao;
         char tema[100];
         printf("\n\n ========= TEMAS =========\n");
-        printf("1 - 100 Anos de Arte Moderna \n");
+        printf("1 - 100 anos da semana de arte moderna \n");
         printf("2 - 150 Anos de Santos Dumont \n");
         printf("3 - Jogos Olimpicos de Paris 2024\n");
-        printf("4 - Literatura Brasileira Comtemporanea\n");
+        printf("4 - Literatura Brasileira Contemporanea\n");
         printf("5 - Voltar\n");
         printf("6 - Sair\n");
         printf("Escolha uma opcao: ");
@@ -489,7 +480,7 @@ void exibicao(){
             break;
           case 4:
             exibirConteudoArquivo4("tema4.txt");
-            strcpy(tema, "Literatura Brasileira Comtemporanea");
+            strcpy(tema, "Literatura Brasileira Contemporanea");
             break;
           case 5:
             main();
