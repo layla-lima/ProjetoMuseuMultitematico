@@ -7,7 +7,7 @@
 • Questionário: *Concluído* <br>
 
 ## Objetivo
-Este projeto tem como funcionalidade apresentar um sistema que permita o usuário comprar bilhetes para a exposição, tendo opções de entrada cheia, meia entrada ou isenção seguindo a legislação vigente. O visitante poderá comprar ingressos para ver um tema ou mais, assim ao entrar no espaço reservado ao tema o visitante deverá mostrar o ticket de entrada que deverá ser dado baixa no sistema.
+Este projeto tem como funcionalidade apresentar um sistema que permita o usuário comprar bilhetes para a exposição, tendo opções de entrada cheia, meia entrada ou isenção seguindo a legislação vigente. O visitante poderá comprar ingresso e selecionar o tema após a validação. Após isso, será necessário realizar um questionário sobre o tema escolhido, gerando um arquivo excel com as estatísticas de cada tema.
 ## Como clonar o Repositório
 
 1. Abra o terminal.
